@@ -1,30 +1,36 @@
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
+import { NavLink } from "react-router-dom";
+import { GiChickenOven, GiIceCreamCone,GiForkKnifeSpoon } from "react-icons/gi";
+import { FaGripfire,FaPeopleRoof } from "react-icons/fa6";
+import { GoTriangleUp } from "react-icons/go";
 
 const navigation = [
   {
-    title: "Home",
-    path: "/dashboard",
-  },
-  {
     title: "Recipes",
-    path: "/dashboard/recipes",
+    path: "/dashboard",
+    icon: <GiForkKnifeSpoon />
+
   },
   {
     title: "What to Cook",
     path: "/dashboard/whattocook",
+    icon: <GiChickenOven />
   },
   {
     title: "Trend",
     path: "/dashboard/trend",
+    icon: <FaGripfire />
   },
   {
     title: "Calorie Checker",
     path: "/dashboard/caloriechecker",
+    icon: <GiIceCreamCone />
   },
   {
     title: "About",
     path: "/dashboard/about",
+    icon: <FaPeopleRoof />
   },
 ];
 
@@ -33,7 +39,7 @@ const Navbar = () => {
     <div className="navbar bg-[#FEFEF6]">
       <div className="nav-1 m-auto w-8/12 flex items-center justify-between">
         <div className="logo">
-          <img width="150" src="images/logo.avif" alt="" />
+          <img width="150" src="/images/logo.avif" alt="logo" />
         </div>
         <div className="search-div flex items-stretch h-12 w-6/12 ">
           <input
@@ -41,6 +47,7 @@ const Navbar = () => {
             type="search"
             name="search"
             id="search"
+            placeholder="Search food..."
           />
           <p className=" bg-main text-white w-2/12 flex justify-center items-center rounded-e-md">
             <CiSearch />
@@ -56,6 +63,19 @@ const Navbar = () => {
             <p className="text-[11px] text-gray-500">veya üye ol</p>
           </div>
         </div>
+      </div>
+      <div className="nav-2 w-full bg-main border-b-8 border-b-secondaryColor">
+        <ul className="m-auto w-8/12 flex justify-center gap-16 ">
+          {navigation.map((item) => (
+            <li className="text-center p-2 relative flex flex-col justify-center items-center after:content-'' after:absolute after:top-2 after:left-[-10px] after:w-[0.3px] after:h-10 after:bg-gray-100 w-28 hover:opacity-65 text-nowrap " key={item.title}>
+              <p className=" text-navbaricon text-[2rem]">
+                {item.icon}
+              </p>
+              <NavLink className=" text-white uppercase font-lato text-navlink" to={item.path}>{item.title}</NavLink>
+              <span className="absolute bottom-[-5.5px] text-secondaryColor arrow hidden"><GoTriangleUp /></span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
