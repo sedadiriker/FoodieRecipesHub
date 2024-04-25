@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
         email,
         password
       );
+      navigate("/")
     } catch (err) {}
   };
 

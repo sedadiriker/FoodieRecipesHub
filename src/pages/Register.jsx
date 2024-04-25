@@ -1,18 +1,15 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthProvider";
-import GoogleIcon from "../assets/GoogleIcon";
 import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider } from "firebase/auth";
-import { signInWithPopup } from "firebase/auth";
-import { auth } from "../auth/firebase";
 
-const Login = () => {
+const Register = () => {
   const [info, setInfo] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
-  const navigate = useNavigate()
-  const { signIn } = useAuthContext();
+  const { createUser } = useAuthContext();
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
@@ -21,19 +18,9 @@ const Login = () => {
   const { email, password } = info;
   const handleSubmit = (e) => {
     e.preventDefault();
-    signIn(email, password);
+    createUser(email, password);
   };
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      signIn(user.email, user.providerId )
-      console.log(user)
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -49,6 +36,42 @@ const Login = () => {
           method="POST"
           onSubmit={handleSubmit}
         >
+          <div>
+            <label
+              htmlFor="firstname"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              First name
+            </label>
+            <div className="mt-2">
+              <input
+                id="firstname"
+                name="firstName"
+                type="text"
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor outline-none sm:text-sm sm:leading-6 ps-5"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              htmlFor="lastname"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Last name
+            </label>
+            <div className="mt-2">
+              <input
+                id="lastname"
+                name="lastName"
+                type="text"
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor outline-none sm:text-sm sm:leading-6 ps-5"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
           <div>
             <label
               htmlFor="email"
@@ -77,14 +100,6 @@ const Login = () => {
               >
                 Password
               </label>
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-main hover:text-secondaryColor"
-                >
-                  Forgot password?
-                </a>
-              </div>
             </div>
             <div className="mt-2">
               <input
@@ -103,26 +118,13 @@ const Login = () => {
               type="submit"
               className="flex w-full justify-center rounded-md bg-secondaryColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Sign in
-            </button>
-            <button
-            onClick={handleGoogleSignIn}
-              className="flex w-full justify-center rounded-md bg-secondaryColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              type="button"
-            >
-              Continue with Google
-              <GoogleIcon color="currentColor" />
+              Register
             </button>
           </div>
         </form>
-
-        <div className="flex gap-3 items-center justify-center mt-5 ">
-          <span> Don't you have an account?</span>
-          <span onClick={()=> navigate('/register')} className=" text-main underline cursor-pointer">Register</span>
-        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

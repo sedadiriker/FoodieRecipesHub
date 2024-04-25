@@ -9,6 +9,7 @@ import About from "../pages/About";
 import CalorıeChecker from "../pages/CalorıeChecker";
 import WhatToCook from "../pages/WhatToCook";
 import NotFound from "../pages/NotFound";
+import Register from "../pages/Register";
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="recipes" element={<Recipes />} />
           <Route path=""  element={<PrivateRouter />}>
             <Route path="/recipes/:id" element={<RecipesDetail />} />
