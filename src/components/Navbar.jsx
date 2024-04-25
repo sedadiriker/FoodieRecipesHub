@@ -8,28 +8,28 @@ import { GoTriangleUp } from "react-icons/go";
 const navigation = [
   {
     title: "Recipes",
-    path: "/dashboard",
+    path: "/recipes",
     icon: <GiForkKnifeSpoon />
 
   },
   {
     title: "What to Cook",
-    path: "/dashboard/whattocook",
+    path: "/whattocook",
     icon: <GiChickenOven />
   },
   {
     title: "Trend",
-    path: "/dashboard/trend",
+    path: "/trend",
     icon: <FaGripfire />
   },
   {
     title: "Calorie Checker",
-    path: "/dashboard/caloriechecker",
+    path: "/caloriechecker",
     icon: <GiIceCreamCone />
   },
   {
     title: "About",
-    path: "/dashboard/about",
+    path: "/about",
     icon: <FaPeopleRoof />
   },
 ];
@@ -59,8 +59,8 @@ const Navbar = () => {
             <IoPersonCircleOutline />
           </p>
           <div>
-            <p className=" text-gray-700">Giriş yap</p>
-            <p className="text-[11px] text-gray-500">veya üye ol</p>
+            <p className=" text-gray-700">Sign in</p>
+            <p className="text-[11px] text-gray-500">or register</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Recipes from "../pages/Recipes";
 import Login from "../pages/Login";
@@ -13,22 +13,20 @@ import NotFound from "../pages/NotFound";
 const AppRouter = () => {
   return (
     <div>
-      <BrowserRouter>
         <Navbar />
         <Routes>
-        <Route path="/" element={<Login />} />
-      <Route path="dashboard" element={<PrivateRouter/>}>
-        <Route path="" element={<Recipes />} />
-        <Route path=":id" element={<RecipesDetail />} />
-        <Route path="calorıechecker" element={<CalorıeChecker />} />
-        <Route path="whattocook" element={<WhatToCook />} />
-        <Route path="trend" element={<Trend />} />
-        <Route path="about" element={<About />} />
-      </Route>
+          <Route path="/" element={<Login />} />
+          <Route path="recipes" element={<Recipes />} />
+          <Route path=""  element={<PrivateRouter />}>
+            <Route path="/recipes/:id" element={<RecipesDetail />} />
+          </Route>
+          <Route path="calorıechecker" element={<CalorıeChecker />} />
+          <Route path="whattocook" element={<WhatToCook />} />
+          <Route path="trend" element={<Trend />} />
+          <Route path="about" element={<About />} />
 
-      <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
     </div>
   );
 };
