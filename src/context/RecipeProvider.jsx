@@ -9,6 +9,7 @@ export const useRecipeContext = () => {
 
 const RecipeProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const getRecies = async () => {
     const URL = "https://dummyjson.com/recipes";
@@ -26,7 +27,16 @@ const RecipeProvider = ({ children }) => {
   useEffect(() => {
     getRecies();
   }, []);
-  return <recipeContext.Provider value={{recipes}}>{children}</recipeContext.Provider>;
+
+  //!search işlemi için
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  return (
+    <recipeContext.Provider value={{ recipes: filteredRecipes, setSearchTerm }}>
+      {children}
+    </recipeContext.Provider>
+  );
 };
 
 export default RecipeProvider;
