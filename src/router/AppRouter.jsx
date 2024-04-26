@@ -11,6 +11,7 @@ import WhatToCook from "../pages/WhatToCook";
 import NotFound from "../pages/NotFound";
 import Register from "../pages/Register";
 import TrendDetail from "../components/TrendDetail";
+import Footer from "../components/Footer";
 
 const AppRouter = () => {
   return (
@@ -33,6 +34,7 @@ const AppRouter = () => {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer/>
     </div>
   );
 };
