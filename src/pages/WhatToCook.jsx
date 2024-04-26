@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
-
+import { GiKnifeFork } from "react-icons/gi";
+import { LuAlarmClock } from "react-icons/lu";
 const WhatToCook = () => {
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
@@ -31,8 +32,15 @@ const WhatToCook = () => {
     getRecipe();
   }, []);
 
-  const { name, image, ingredients, instructions } = recipe;
-  return (
+  const {
+    name,
+    image,
+    ingredients,
+    instructions,
+    servings,
+    prepTimeMinutes,
+    cookTimeMinutes,
+  } = recipe;  return (
     <>
       {loading ? (
         <Loading />
@@ -47,6 +55,20 @@ const WhatToCook = () => {
             </div>
 
             <div className=" sm:w-5/12">
+            <div className="flex justify-center gap-5">
+                <span className="flex items-center gap-1 text-gray-400">
+                  <p className=" text-green">
+                    <GiKnifeFork />
+                  </p>
+                  {` ${servings} servings`}
+                </span>
+                <span className="flex items-center gap-1 text-gray-400">
+                  <p className=" text-green">
+                    <LuAlarmClock />{" "}
+                  </p>
+                  {`${prepTimeMinutes} min preperation / ${cookTimeMinutes}  min cook`}
+                </span>
+              </div>
               <div>
                 <h3 className=" text-title text-center uppercase text-gray-500 font-montserrat my-5 font-bold">
                   ingredients

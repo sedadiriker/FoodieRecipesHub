@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import { GiKnifeFork } from "react-icons/gi";
 import { LuAlarmClock } from "react-icons/lu";
@@ -9,7 +9,7 @@ const RecipesDetail = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
-
+const navigate = useNavigate()
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -86,6 +86,9 @@ const RecipesDetail = () => {
                 </h3>
                 <p>{instructions}</p>
               </div>
+              <button onClick={()=> navigate(-1)} className="bg-green hover:opacity-80 text-white font-bold py-2 px-4 rounded fixed bottom-3 right-3">
+              Back
+              </button>
             </div>
           </div>
         </div>

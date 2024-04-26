@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecipeContext } from '../context/RecipeProvider';
 import Loading from '../components/Loading';
-import { useNavigate } from 'react-router-dom';
 import TrendDetail from '../components/TrendDetail';
 
 const Trend = () => {
@@ -36,7 +35,7 @@ const Trend = () => {
         ) : (
           <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {recipes.slice(10, 18)?.map(({ id, image, name }) => (
-              <div onClick={() => openModal(id)} key={id} className="group relative">
+              <div onClick={() => openModal(id)} key={id} className="group relative cursor-pointer">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img src={image} alt={name} className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                 </div>
