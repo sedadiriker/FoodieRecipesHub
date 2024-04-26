@@ -17,14 +17,11 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(sessionStorage.getItem("curentUser")) || false
+    JSON.parse(localStorage.getItem("curentUser")) || false
   );
   const navigate = useNavigate();
-  const { id } = useParams();
 
-  useEffect(() => {
-    userServer()
-  }, []);
+  
   //!register
   const createUser = async (email, password, displayName) => {
     try {
@@ -93,15 +90,18 @@ const userServer = ()=> {
     if(user){
       const{email,displayName,photoURL} = user
       setCurrentUser({email,displayName,photoURL})
-      sessionStorage.setItem(
+      localStorage.setItem(
         "currentUser", JSON.stringify({email,displayName,photoURL})
       )
     }else{
       setCurrentUser(false)
-      sessionStorage.removeItem("currentUser")
+      localStorage.removeItem("currentUser")
     }
   })
 }
+useEffect(() => {
+  userServer()
+}, []);
 //!forgotpasword
 const forgotPassword = (email) => {
   sendPasswordResetEmail(auth,email)

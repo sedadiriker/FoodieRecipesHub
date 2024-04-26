@@ -1,10 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const RecipesDetail = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const getRecipeDetail = async () => {
     const URL = `https://dummyjson.com/recipes/${id}`;
@@ -23,7 +32,12 @@ const RecipesDetail = () => {
   console.log(recipe);
   const { name, image, ingredients,instructions } = recipe;
   return (
-    <div className="border border-3 p-10 ">
+    <>
+    {
+      loading ? (
+        <Loading/>
+      ):(
+        <div className="border border-3 p-10 ">
       <h2 className="font-montserrat text-[1.5rem] font-bold uppercase text-center mb-5 text-gray-600">{name}</h2>
       <div className="flex gap-10 justify-center flex-wrap  flex-md-nowrap">
         <div className=" sm:w-5/12">
@@ -46,6 +60,9 @@ const RecipesDetail = () => {
         </div>
       </div>
     </div>
+      )
+    }
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import {  Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Recipes from "../pages/Recipes";
 import Login from "../pages/Login";
@@ -14,21 +14,22 @@ import Register from "../pages/Register";
 const AppRouter = () => {
   return (
     <div>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="recipes" element={<Recipes />} />
-          <Route path=""  element={<PrivateRouter />}>
-            <Route path="/recipes/:id" element={<RecipesDetail />} />
-          </Route>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="recipes" element={<Recipes />} />
+        <Route path="" element={<PrivateRouter />}>
+          <Route path="/recipes/:id" element={<RecipesDetail />} />
           <Route path="calorıechecker" element={<CalorıeChecker />} />
           <Route path="whattocook" element={<WhatToCook />} />
           <Route path="trend" element={<Trend />} />
-          <Route path="about" element={<About />} />
+        </Route>
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Route path="about" element={<About />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 };

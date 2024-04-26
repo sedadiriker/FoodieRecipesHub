@@ -1,6 +1,6 @@
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   GiChickenOven,
   GiIceCreamCone,
@@ -48,12 +48,19 @@ const navigation = [
 const Navbar = () => {
   const { logOut, currentUser } = useAuthContext();
   const { photoURL, displayName } = currentUser;
+  const navigate = useNavigate();
   console.log(currentUser);
   return (
     <div className="navbar bg-[#FEFEF6]">
       <div className="nav-1 m-auto w-8/12 flex items-center justify-between">
         <div className="logo">
-          <img width="150" src="/images/logo.avif" alt="logo" />
+          <img
+            className=" cursor-pointer"
+            onClick={() => navigate("/recipes")}
+            width="150"
+            src="/images/logo.avif"
+            alt="logo"
+          />
         </div>
         <div className="search-div flex items-stretch h-12 w-6/12 ">
           <input
@@ -74,22 +81,28 @@ const Navbar = () => {
               <span className="absolute -inset-1.5" />
               <span className="sr-only">Open user menu</span>
 
-              <div className="sign-div flex items-center gap-1 border border-1 p-3 cursor-pointer h-12 rounded-md">
+              <div className="sign-div flex items-center gap-1 border border-1 border-main p-3 cursor-pointer h-12 rounded-md">
                 {currentUser ? (
                   <>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src={photoURL || avatar}
-                      alt="user"
-                      referrerPolicy="no-referrer"
-                    />
+                    {photoURL ? (
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src={photoURL}
+                        alt="user"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <p className="rounded-full text-[2rem] text-secondaryColor">
+                        <IoPersonCircleOutline />
+                      </p>
+                    )}
                     <div>
-                        <p className=" text-gray-900 uppercase">{displayName}</p>
+                      <p className=" text-gray-900 uppercase">{displayName}</p>
                     </div>
                   </>
                 ) : (
                   <>
-                    <p className="text-[2rem] text-gray-400">
+                    <p className="text-[2rem] text-secondaryColor">
                       <IoPersonCircleOutline />
                     </p>
                     <div>
@@ -113,69 +126,53 @@ const Navbar = () => {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-              {
-                currentUser ? (
-                  <>
-              <Menu.Item>
-                {({ active }) => (
-                  <span
-                    onClick={() => logOut()}
-                    role="button"
-                    className={classNames(
-                      active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
-                    )}
-                  >
-                    Sign out
-                  </span>
-                )}
-              </Menu.Item>
-                  </>
-                ):(
-                  <>
+              {currentUser ? (
+                <>
                   <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/register"
-                    className={classNames(
-                      active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-gray-700"
+                    {({ active }) => (
+                      <span
+                        onClick={() => logOut()}
+                        role="button"
+                        className={classNames(
+                          active ? "bg-main text-white" : "",
+                          "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                        )}
+                      >
+                        Sign out
+                      </span>
                     )}
-                  >
-                    Register
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <Link
-                    to="/"
-                    className={classNames(
-                      active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-gray-700"
+                  </Menu.Item>
+                </>
+              ) : (
+                <>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to="/register"
+                        className={classNames(
+                          active ? "bg-green text-white" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Register
+                      </Link>
                     )}
-                  >
-                    Login
-                  </Link>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <span
-                    onClick={() => logOut()}
-                    role="button"
-                    className={classNames(
-                      active ? "bg-gray-100" : "",
-                      "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        to="/"
+                        className={classNames(
+                          active ? "bg-green text-white" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Sign In
+                      </Link>
                     )}
-                  >
-                    Sign out
-                  </span>
-                )}
-              </Menu.Item>
-                  </>
-                )
-              }
+                  </Menu.Item>
+                </>
+              )}
             </Menu.Items>
           </Transition>
         </Menu>
