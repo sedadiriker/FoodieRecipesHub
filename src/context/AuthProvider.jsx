@@ -1,36 +1,50 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../auth/firebase";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
+import { toastSuccessNotify,toastErrorNotify, toastWarnNotify } from "../helper/ToastNotify";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(sessionStorage.getItem("user")) || null
+    JSON.parse(sessionStorage.getItem("curentUser")) || false
   );
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    sessionStorage.setItem("user", JSON.stringify(currentUser));
-  }, [currentUser]);
-  
-  const createUser = async (email, password) => {
+    userServer()
+  }, []);
+  //!register
+  const createUser = async (email, password, displayName) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+      //! kullanıcı profilini güncellemek için kullanılan firebase metodu
+        await updateProfile(auth.currentUser, {
+          displayName,
+        })
       navigate("/")
-    } catch (err) {}
-  };
+      toastSuccessNotify("Registered successfully");
+    } catch (err) {
+      toastErrorNotify(err.message);
 
+    }
+  };
+//!sign in
   const signIn = async (email, password) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -38,12 +52,68 @@ const AuthProvider = ({ children }) => {
         email,
         password
       );
-      navigate(`/recipes/${id}`);
-      setCurrentUser(email, password);
+      console.log(userCredential)
+      navigate(`/recipes`);
+      toastSuccessNotify("Registered successfully");
       // console.log(userCredential);
-    } catch (error) {}
+    } catch (error) {
+      toastErrorNotify(error.message);
+
+    }
   };
-  const values = { currentUser, createUser, signIn };
+//! logout
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        toastSuccessNotify("Logged out successfully");
+        navigate("/")
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
+//! google ile giriş
+const googleProvider = () => {
+  
+  const provider = new GoogleAuthProvider()
+
+  signInWithPopup(auth,provider)
+  .then((result) => {
+    navigate("/recipes")
+    toastSuccessNotify("Logged in successfully")
+  })
+  .catch((error) => {
+    toastErrorNotify(error.message)
+  })
+}
+//! auto state control
+const userServer = ()=> {
+  onAuthStateChanged(auth, (user) => {
+    if(user){
+      const{email,displayName,photoURL} = user
+      setCurrentUser({email,displayName,photoURL})
+      sessionStorage.setItem(
+        "currentUser", JSON.stringify({email,displayName,photoURL})
+      )
+    }else{
+      setCurrentUser(false)
+      sessionStorage.removeItem("currentUser")
+    }
+  })
+}
+//!forgotpasword
+const forgotPassword = (email) => {
+  sendPasswordResetEmail(auth,email)
+  .then(()=>{
+    toastWarnNotify("Please check your mail box")
+  })
+  .catch((error)=> {
+    toastErrorNotify(error.message)
+  })
+}
+
+  const values = { currentUser, createUser, signIn, logOut, googleProvider,forgotPassword };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };

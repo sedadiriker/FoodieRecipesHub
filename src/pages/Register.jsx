@@ -15,10 +15,12 @@ const Register = () => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
-  const { email, password } = info;
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser(email, password);
+    const { email, password,firstName,lastName } = info;
+    const displayName = `${firstName} ${lastName}`
+    createUser(email, password,displayName);
+    console.log(info)
   };
 
   return (
@@ -109,6 +111,7 @@ const Register = () => {
                 autoComplete="current-password"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor outline-none sm:text-sm sm:leading-6 ps-5"
+                onChange={handleChange}
               />
             </div>
           </div>

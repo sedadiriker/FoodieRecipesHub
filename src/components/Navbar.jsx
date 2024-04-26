@@ -11,11 +11,12 @@ import { GoTriangleUp } from "react-icons/go";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../context/AuthProvider";
+import avatar from "../assets/avatar.png";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-
 const navigation = [
   {
     title: "Recipes",
@@ -45,6 +46,9 @@ const navigation = [
 ];
 
 const Navbar = () => {
+  const { logOut, currentUser } = useAuthContext();
+  const { photoURL, displayName } = currentUser;
+  console.log(currentUser);
   return (
     <div className="navbar bg-[#FEFEF6]">
       <div className="nav-1 m-auto w-8/12 flex items-center justify-between">
@@ -64,21 +68,39 @@ const Navbar = () => {
           </p>
         </div>
 
-       
         <Menu as="div" className="relative ml-3">
           <div>
             <Menu.Button className="relative flex text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 ">
               <span className="absolute -inset-1.5" />
               <span className="sr-only">Open user menu</span>
+
               <div className="sign-div flex items-center gap-1 border border-1 p-3 cursor-pointer h-12 rounded-md">
-          <p className="text-[2rem] text-gray-400">
-            <IoPersonCircleOutline />
-          </p>
-          <div>
-            <p className=" text-gray-700">Sign in</p>
-            <p className="text-[11px] text-gray-500">or register</p>
-          </div>
-        </div>
+                {currentUser ? (
+                  <>
+                    <img
+                      className="h-8 w-8 rounded-full"
+                      src={photoURL || avatar}
+                      alt="user"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div>
+                        <p className=" text-gray-900 uppercase">{displayName}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-[2rem] text-gray-400">
+                      <IoPersonCircleOutline />
+                    </p>
+                    <div>
+                      <div>
+                        <p className=" text-gray-700">Sign in</p>
+                        <p className="text-[11px] text-gray-500">or register</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
             </Menu.Button>
           </div>
           <Transition
@@ -91,7 +113,27 @@ const Navbar = () => {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              {
+                currentUser ? (
+                  <>
               <Menu.Item>
+                {({ active }) => (
+                  <span
+                    onClick={() => logOut()}
+                    role="button"
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                    )}
+                  >
+                    Sign out
+                  </span>
+                )}
+              </Menu.Item>
+                  </>
+                ):(
+                  <>
+                  <Menu.Item>
                 {({ active }) => (
                   <Link
                     to="/register"
@@ -120,6 +162,7 @@ const Navbar = () => {
               <Menu.Item>
                 {({ active }) => (
                   <span
+                    onClick={() => logOut()}
                     role="button"
                     className={classNames(
                       active ? "bg-gray-100" : "",
@@ -130,6 +173,9 @@ const Navbar = () => {
                   </span>
                 )}
               </Menu.Item>
+                  </>
+                )
+              }
             </Menu.Items>
           </Transition>
         </Menu>

@@ -2,9 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthProvider";
 import GoogleIcon from "../assets/GoogleIcon";
 import { useNavigate } from "react-router-dom";
-import { GoogleAuthProvider } from "firebase/auth";
-import { signInWithPopup } from "firebase/auth";
-import { auth } from "../auth/firebase";
+
 
 const Login = () => {
   const [info, setInfo] = useState({
@@ -12,7 +10,7 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate()
-  const { signIn } = useAuthContext();
+  const { signIn, googleProvider,forgotPassword } = useAuthContext();
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
@@ -23,17 +21,7 @@ const Login = () => {
     e.preventDefault();
     signIn(email, password);
   };
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      signIn(user.email, user.providerId )
-      console.log(user)
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -45,8 +33,6 @@ const Login = () => {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form
           className="space-y-6"
-          action="#"
-          method="POST"
           onSubmit={handleSubmit}
         >
           <div>
@@ -78,12 +64,12 @@ const Login = () => {
                 Password
               </label>
               <div className="text-sm">
-                <a
-                  href="#"
+                <span
+                  onClick={()=> forgotPassword()}
                   className="font-semibold text-main hover:text-secondaryColor"
                 >
                   Forgot password?
-                </a>
+                </span>
               </div>
             </div>
             <div className="mt-2">
@@ -94,6 +80,7 @@ const Login = () => {
                 autoComplete="current-password"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondaryColor outline-none sm:text-sm sm:leading-6 ps-5"
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -106,7 +93,7 @@ const Login = () => {
               Sign in
             </button>
             <button
-            onClick={handleGoogleSignIn}
+            onClick={() => googleProvider()}
               className="flex w-full justify-center rounded-md bg-secondaryColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               type="button"
             >
