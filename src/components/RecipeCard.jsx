@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const RecipeCard = ({ recipe}) => {
     const navigate = useNavigate()
@@ -6,7 +6,7 @@ const RecipeCard = ({ recipe}) => {
   return (
     <div
       key={id}
-      className="group relative"
+      className="group relative cursor-pointer"
       onClick={() => navigate(`${id}`)}
     >
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -18,10 +18,10 @@ const RecipeCard = ({ recipe}) => {
       </div>
       <div className="mt-4">
           <h3 className="text-md text-gray-700 text-center font-lato">
-            <Link to={`/${id}`}>
+            <p>
               <span aria-hidden="true" className="absolute inset-0" />
               {name}
-            </Link>
+            </p>
           </h3>
       </div>
     </div>

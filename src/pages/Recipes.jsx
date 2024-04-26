@@ -1,33 +1,17 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RecipeCard from "../components/RecipeCard";
 import Loading from "../components/Loading";
+import { useRecipeContext } from "../context/RecipeProvider";
 
 const Recipes = () => {
-  const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const {recipes} = useRecipeContext()
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1000);
     return () => clearTimeout(timer);
   }, [loading]);
-  const getFoods = async () => {
-    const URL = "https://dummyjson.com/recipes";
-
-    try {
-      const { data } = await axios(URL);
-      const { recipes } = data;
-      setRecipes(recipes);
-      console.log(recipes);
-    } catch (err) {
-      console.log(err);
-    } 
-  };
-  useEffect(() => {
-    getFoods();
-  }, []);
 
   return (
     <div className="bg-white">
