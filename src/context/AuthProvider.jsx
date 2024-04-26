@@ -10,7 +10,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { json, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { toastSuccessNotify,toastErrorNotify, toastWarnNotify } from "../helper/ToastNotify";
 
 const AuthContext = createContext();
@@ -85,23 +85,24 @@ const googleProvider = () => {
   })
 }
 //! auto state control
-const userServer = ()=> {
-  onAuthStateChanged(auth, (user) => {
-    if(user){
-      const{email,displayName,photoURL} = user
-      setCurrentUser({email,displayName,photoURL})
-      localStorage.setItem(
-        "currentUser", JSON.stringify({email,displayName,photoURL})
-      )
-    }else{
-      setCurrentUser(false)
-      localStorage.removeItem("currentUser")
-    }
-  })
-}
 useEffect(() => {
-  userServer()
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const { email, displayName, photoURL } = user;
+      setCurrentUser({ email, displayName, photoURL });
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({ email, displayName, photoURL })
+      );
+    } else {
+      setCurrentUser(false);
+      localStorage.removeItem("currentUser");
+    }
+  });
+
+  return () => unsubscribe(); // Aboneliği kaldır
 }, []);
+
 //!forgotpasword
 const forgotPassword = (email) => {
   sendPasswordResetEmail(auth,email)

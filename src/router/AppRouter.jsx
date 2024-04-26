@@ -23,18 +23,18 @@ const AppRouter = () => {
         <Route path="recipes" element={<Recipes />} />
         <Route path="" element={<PrivateRouter />}>
           <Route path="recipes/:id" element={<RecipesDetail />} />
-          <Route path="caloriechecker" element={<CalorıeChecker />} />
-          <Route path="whattocook" element={<WhatToCook />} />
-          <Route path="trend" element={<Trend />}>
-            <Route path=":trendId" element={<TrendDetail/>}/>
-          </Route>
+        </Route>
+        <Route path="caloriechecker" element={<CalorıeChecker />} />
+        <Route path="whattocook" element={<WhatToCook />} />
+        <Route path="trend" element={<Trend />}>
+          <Route path=":trendId" element={<TrendDetail />} />
         </Route>
 
         <Route path="about" element={<About />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
