@@ -46,8 +46,8 @@ const navigate = useNavigate()
       {loading ? (
         <Loading />
       ) : (
-        <div className="border border-3 p-10 ">
-          <h2 className="font-montserrat text-[1.5rem] font-bold uppercase text-center mb-5 text-gray-600">
+        <div className=" p-10 dark:bg-slate-800 relative">
+          <h2 className="font-montserrat text-[1.5rem] font-bold uppercase text-center mb-5 text-gray-600 dark:text-white">
             {name}
           </h2>
           <div className="flex gap-10 justify-center flex-wrap  flex-md-nowrap">
@@ -71,22 +71,22 @@ const navigate = useNavigate()
                 </span>
               </div>
               <div>
-                <h3 className=" text-title text-center uppercase text-gray-500 font-montserrat my-5 font-bold">
+                <h3 className=" text-title text-center uppercase text-gray-500 font-montserrat my-5 font-bold dark:text-white">
                   ingredients
                 </h3>
                 <oll>
                   {ingredients?.map((item) => (
-                    <li className=" font-roboto text-[18px]">{item}</li>
+                    <li className=" font-roboto text-[18px] dark:text-gray-300">{item}</li>
                   ))}
                 </oll>
               </div>
               <div>
-                <h3 className=" text-title text-center uppercase text-gray-500 font-bold font-montserrat my-5">
+                <h3 className=" text-title text-center uppercase text-gray-500 font-bold font-montserrat my-5 dark:text-white">
                   instructions
                 </h3>
-                <p>{instructions}</p>
+                <p className=" dark:text-gray-300">{instructions}</p>
               </div>
-              <button onClick={()=> navigate(-1)} className="bg-green hover:opacity-80 text-white font-bold py-2 px-4 rounded fixed bottom-3 right-3">
+              <button onClick={()=> navigate(-1)} className="bg-green hover:opacity-80 text-white font-bold py-2 px-4 rounded absolute bottom-2 right-3">
               Back
               </button>
             </div>

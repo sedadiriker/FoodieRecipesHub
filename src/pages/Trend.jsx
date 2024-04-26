@@ -27,9 +27,9 @@ const Trend = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-slate-800">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-600 uppercase">Trend Recipes</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-gray-600 uppercase dark:text-white">Trend Recipes</h2>
         {loading ? (
           <Loading />
         ) : (
@@ -40,9 +40,9 @@ const Trend = () => {
                   <img src={image} alt={name} className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                 </div>
                 <div className="mt-4">
-                  <h3 className="text-md text-gray-700 text-center font-lato">
+                  <h3 className="text-md text-gray-700 text-center font-lato dark:text-gray-300">
                     <p>
-                      <span aria-hidden="true" className="absolute inset-0" />
+                      <span aria-hidden="true" className="absolute inset-0 " />
                       {name}
                     </p>
                   </h3>

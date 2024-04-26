@@ -50,9 +50,9 @@ const CalorıeChecker = () => {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-slate-800">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-600 uppercase">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-600 uppercase dark:text-white">
           Calori Checker
         </h2>
         {loading ? (
@@ -69,7 +69,7 @@ const CalorıeChecker = () => {
                   />
                 </div>
                 <div className="mt-4">
-                  <h3 className="text-md text-gray-700 text-center font-lato">
+                  <h3 className="text-md text-gray-700 text-center font-lato dark:text-gray-300">
                     <p>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {name}
@@ -84,7 +84,7 @@ const CalorıeChecker = () => {
           </div>
         )}
         <div>
-          <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-8">
+          <div className="flex items-center justify-between border-t border-gray-200 bg-white dark:bg-slate-600 px-4 py-3 sm:px-6 mt-8">
             <div className="flex flex-1 justify-between sm:hidden">
               <button className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
                 Previous
@@ -95,7 +95,7 @@ const CalorıeChecker = () => {
             </div>
             <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-700 dark:text-white">
                   Showing <span className="font-medium">{firstRecipe + 1}</span> to{" "}
                   <span className="font-medium">{lastRecipe > 30 ? 30 : lastRecipe}</span> of{" "}
                   <span className="font-medium">{recipes.length}</span> results

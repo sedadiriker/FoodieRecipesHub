@@ -17,7 +17,7 @@ const RecipeCard = ({ recipe}) => {
         />
       </div>
       <div className="mt-4">
-          <h3 className="text-md text-gray-700 text-center font-lato">
+          <h3 className="text-md text-gray-700 dark:text-white text-center font-lato">
             <p>
               <span aria-hidden="true" className="absolute inset-0" />
               {name}

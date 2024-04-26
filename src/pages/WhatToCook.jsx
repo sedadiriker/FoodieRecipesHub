@@ -45,8 +45,8 @@ const WhatToCook = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="border border-3 p-10 ">
-          <h2 className="font-montserrat text-[1.5rem] font-bold uppercase text-center mb-5 text-gray-600">
+        <div className=" p-10 dark:bg-slate-800 relative">
+          <h2 className="font-montserrat text-[1.5rem] font-bold uppercase text-center mb-5 text-gray-600 dark:text-white">
             {name}
           </h2>
           <div className="flex gap-10 justify-center flex-wrap  flex-md-nowrap">
@@ -56,13 +56,13 @@ const WhatToCook = () => {
 
             <div className=" sm:w-5/12">
             <div className="flex justify-center gap-5">
-                <span className="flex items-center gap-1 text-gray-400">
+                <span className="flex items-center gap-1 text-gray-400 text-[10px] md:text-[16px]">
                   <p className=" text-green">
                     <GiKnifeFork />
                   </p>
                   {` ${servings} servings`}
                 </span>
-                <span className="flex items-center gap-1 text-gray-400">
+                <span className="flex items-center gap-1 text-gray-400 text-[10px] md:text-[16px]">
                   <p className=" text-green">
                     <LuAlarmClock />{" "}
                   </p>
@@ -70,22 +70,22 @@ const WhatToCook = () => {
                 </span>
               </div>
               <div>
-                <h3 className=" text-title text-center uppercase text-gray-500 font-montserrat my-5 font-bold">
+                <h3 className=" text-title text-center uppercase text-gray-500 font-montserrat my-5 font-bold dark:text-white">
                   ingredients
                 </h3>
                 <oll>
                   {ingredients?.map((item) => (
-                    <li className=" font-roboto text-[18px]">{item}</li>
+                    <li className=" font-roboto text-[18px] dark:text-gray-300">{item}</li>
                   ))}
                 </oll>
               </div>
               <div>
-                <h3 className=" text-title text-center uppercase text-gray-500 font-bold font-montserrat my-5">
+                <h3 className=" text-title text-center uppercase text-gray-500 font-bold font-montserrat my-5 dark:text-white">
                   instructions
                 </h3>
-                <p>{instructions}</p>
+                <p className="dark:text-gray-300">{instructions}</p>
               </div>
-              <button onClick={()=> getRecipe()} className="bg-green hover:opacity-80 text-white font-bold py-2 px-4 rounded fixed bottom-3 right-3">
+              <button onClick={()=> getRecipe()} className="bg-green hover:opacity-80 text-white font-bold py-2 px-4 rounded absolute bottom-3 right-3">
               What to Cook
               </button>
             </div>

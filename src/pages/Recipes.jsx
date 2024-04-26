@@ -28,9 +28,9 @@ const Recipes = () => {
   };
 
   return (
-    <div className="bg-white relative">
+    <div className="bg-white relative dark:bg-slate-800">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-600 uppercase">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-600 dark:text-white uppercase">
           Recipes
         </h2>
         {loading ? (

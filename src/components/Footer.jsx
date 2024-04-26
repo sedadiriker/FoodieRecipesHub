@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
-    <div className="relative isolate overflow-hidden bg-sectionColor py-16 sm:py-24 lg:py-32">
+    <div className="relative isolate overflow-hidden bg-sectionColor dark:bg-slate-700 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           
@@ -12,7 +12,7 @@ const Footer = () => {
                 
               </div>
               <dt className="mb-5 mt-[-75px]"><img src="images/logo.avif" width="100" alt="" /></dt>
-              <dd className="mt-2 leading-7 text-gray-400 flex flex-col">
+              <dd className="mt-2 leading-7 text-gray-400 flex flex-col dark:text-white">
                 <Link className="hover:text-main" to="recipes" onClick={() => window.scrollTo(0, 0)}>Recipes</Link>
                 <Link className="hover:text-main" to="whattocook" onClick={() => window.scrollTo(0, 0)}>What To Cook</Link>
                 <Link className="hover:text-main" to="trend" onClick={() => window.scrollTo(0, 0)}>Trend</Link>
@@ -32,7 +32,7 @@ const Footer = () => {
           </dl>
           <div className="max-w-xl lg:max-w-lg">
             <h2 className="text-3xl font-bold tracking-tight text-main sm:text-4xl">Subscribe to our newsletter.</h2>
-            <p className="mt-4 text-lg leading-8 text-gray-700">
+            <p className="mt-4 text-lg leading-8 text-gray-700 dark:text-white">
               Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing velit quis. Duis tempor incididunt
               dolore.
             </p>
