@@ -8,7 +8,7 @@ import {
 } from "react-icons/gi";
 import { FaGripfire, FaPeopleRoof } from "react-icons/fa6";
 import { GoTriangleUp } from "react-icons/go";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/AuthProvider";
@@ -62,6 +62,13 @@ const Navbar = () => {
     setSearchTerm(searchValue);
     navigate("/recipes");
   };
+
+  useEffect(()=> {
+    if(searchValue === "") {
+      setSearchTerm("")
+    }
+  },[searchValue])
+
   return (
     <div className="navbar bg-[#FEFEF6] dark:bg-slate-700 ">
       <div className="nav-1 m-auto w-11/12 flex items-center justify-between md:justify-evenly border-b border-b-main">
@@ -91,9 +98,9 @@ const Navbar = () => {
               placeholder="Search food..."
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <p className=" bg-main text-white w-2/12 flex justify-center items-center rounded-e-md">
+            <button className=" bg-main text-white w-2/12 flex justify-center items-center rounded-e-md">
               <CiSearch />
-            </p>
+            </button>
           </form>
           <div className="flex">
             <Switch/>
@@ -336,9 +343,9 @@ const Navbar = () => {
               placeholder="Search food..."
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <p className=" bg-main text-white w-2/12 flex justify-center items-center rounded-e-md">
+            <button className=" bg-main text-white w-2/12 flex justify-center items-center rounded-e-md">
               <CiSearch />
-            </p>
+            </button>
           </form>
           
         <ul
