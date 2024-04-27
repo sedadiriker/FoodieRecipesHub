@@ -50,20 +50,20 @@ const navigate = useNavigate()
           <h2 className="font-montserrat text-[1.5rem] font-bold uppercase text-center mb-5 text-gray-600 dark:text-white">
             {name}
           </h2>
-          <div className="flex gap-10 justify-center flex-wrap  flex-md-nowrap">
+          <div className="flex gap-10 justify-center flex-wrap  flex-md-nowrap pb-10">
             <div className=" sm:w-5/12">
               <img className="w-full" src={image} alt="" />
             </div>
 
             <div className=" sm:w-5/12">
               <div className="flex justify-center gap-5">
-                <span className="flex items-center gap-1 text-gray-400">
+                <span className="flex items-center gap-1 text-gray-400 text-[10px] md:text-[16px]">
                   <p className=" text-green">
                     <GiKnifeFork />
                   </p>
                   {` ${servings} servings`}
                 </span>
-                <span className="flex items-center gap-1 text-gray-400">
+                <span className="flex items-center gap-1 text-gray-400 text-[10px] md:text-[16px]">
                   <p className=" text-green">
                     <LuAlarmClock />{" "}
                   </p>

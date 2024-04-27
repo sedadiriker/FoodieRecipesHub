@@ -49,7 +49,7 @@ const WhatToCook = () => {
           <h2 className="font-montserrat text-[1.5rem] font-bold uppercase text-center mb-5 text-gray-600 dark:text-white">
             {name}
           </h2>
-          <div className="flex gap-10 justify-center flex-wrap  flex-md-nowrap">
+          <div className="flex gap-10 justify-center flex-wrap  flex-md-nowrap pb-10">
             <div className=" sm:w-5/12">
               <img className="w-full" src={image} alt="" />
             </div>
